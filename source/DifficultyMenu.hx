@@ -10,18 +10,18 @@ class DifficultyMenu extends FlxState
 {
 	var difficultyArray:Array<Array<Dynamic>> = [['EASY', FlxColor.LIME], ['NORMAL', FlxColor.YELLOW], ['HARD', FlxColor.RED]];
 	var difficultyDescription:Array<String> = [
-		"The pot does not rise up to increase difficulty.\nYour score won't save on this one.",
-		"The pot rises in difficulty.",
-		"Platforms will move at random speeds while the pot rises in difficulty."
+		"- The pot does not rise up to increase difficulty.\n- Narrow range of platform spawning.\n- Your score won't save on this one.",
+		"- The pot rises in difficulty.\n- Regular range of platform spawning.",
+		"- Platforms will move at random speeds while the pot rises in difficulty. \n- Widest range of platform spawning."
 	];
 
 	override function create()
 	{
 		super.create();
 
-        var bg = new FlxSprite().loadGraphic('assets/images/menu/difficulty/back.png');
-        bg.scale.set(2, 2);
-        add(bg);
+		var bg = new FlxSprite().loadGraphic('assets/images/menu/difficulty/back.png');
+		bg.scale.set(2, 2);
+		add(bg);
 	}
 }
 
