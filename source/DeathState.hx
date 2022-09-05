@@ -55,6 +55,7 @@ class DeathState extends FlxSubState
 	function changeSelection(change:Int = 0)
 	{
 		curSelected += change;
+		FlxG.sound.play('assets/sounds/scroll.wav');
 		if (curSelected < 0)
 			curSelected = coolMenuGroup.length - 1;
 		if (curSelected >= coolMenuGroup.length)

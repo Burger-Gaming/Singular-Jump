@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxGame;
+import openfl.display.FPS;
 import openfl.display.Sprite;
 
 class Main extends Sprite
@@ -9,5 +10,6 @@ class Main extends Sprite
 	{
 		super();
 		addChild(new FlxGame(0, 0, MainMenuState, 1, 60, 60, true, false));
+		addChild(new FPS(5, 5, 0xFFFF6600));
 	}
 }

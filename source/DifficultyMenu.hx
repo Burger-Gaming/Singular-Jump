@@ -52,6 +52,8 @@ class DifficultyMenu extends FlxState
 			changeDiff(-1);
 		if (FlxG.keys.justPressed.ENTER)
 			FlxG.switchState(new PlayState());
+		if (FlxG.keys.justPressed.ESCAPE)
+			FlxG.switchState(new MainMenuState());
 	}
 
 	function changeDiff(change:Int)
@@ -61,6 +63,7 @@ class DifficultyMenu extends FlxState
 			FlxG.save.data.difficulty = 2;
 		if (FlxG.save.data.difficulty > 2)
 			FlxG.save.data.difficulty = 0;
+		FlxG.sound.play('assets/sounds/scroll.wav');
 		camFollow.y = yArray[FlxG.save.data.difficulty];
 	}
 }

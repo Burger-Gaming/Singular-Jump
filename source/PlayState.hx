@@ -22,6 +22,7 @@ class PlayState extends FlxState
 	var potFront:FlxSprite;
 	var gameScore:Int = 0;
 	var updateScore:Bool = true;
+	var isDead:Bool = false;
 
 	override public function create()
 	{
@@ -43,13 +44,15 @@ class PlayState extends FlxState
 		egg.antialiasing = false;
 		egg.scale.set(4, 4);
 		egg.updateHitbox();
-		egg.acceleration.y = 900;
+		egg.acceleration.y = 900 * 1.05;
 		egg.maxVelocity.y = 900 * 1.5;
 		egg.screenCenter(XY);
 		add(egg);
 
 		levelBounds = FlxCollision.createCameraWall(FlxG.camera, true, 1, true);
 		add(levelBounds);
+
+		levelBounds.members[3].destroy(); // destroy the floor so you can die
 
 		platformGroup = new FlxGroup();
 		add(platformGroup);
@@ -176,13 +179,21 @@ class PlayState extends FlxState
 		{
 			canJump = true;
 		}
-		if (egg.y == FlxG.height - egg.height)
+		if (egg.y >= FlxG.height && !isDead)
 		{
 			#if !debug
 			updateScore = false;
-			if (gameScore > FlxG.save.data.highScore && FlxG.save.data.difficulty <= 1)
-				FlxG.save.data.highScore = gameScore;
-			openSubState(new DeathState());
+			isDead = true;
+			FlxG.sound.play('assets/sounds/death.wav');
+			FlxG.camera.shake(0.05, 0.75, function()
+			{
+				new FlxTimer().start(0.25, function(tmr:FlxTimer)
+				{
+					if (gameScore > FlxG.save.data.highScore && FlxG.save.data.difficulty <= 1)
+						FlxG.save.data.highScore = gameScore;
+					openSubState(new DeathState());
+				});
+			});
 			#end
 		}
 	}

@@ -74,6 +74,7 @@ class MainMenuState extends FlxState
 
 	function changeSelection(change:Int = 0)
 	{
+		FlxG.sound.play('assets/sounds/scroll.wav');
 		curSelected += change;
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
