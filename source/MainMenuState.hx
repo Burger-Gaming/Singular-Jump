@@ -1,5 +1,6 @@
 package;
 
+import DifficultyMenu.DifficultyCard;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -92,7 +93,7 @@ class MainMenuState extends FlxState
 		switch (option)
 		{
 			case 0:
-				trace('start game lmao');
+				FlxG.switchState(new DifficultyMenu());
 			case 1:
 				#if desktop
 				Sys.exit(0);
