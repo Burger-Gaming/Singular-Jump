@@ -37,11 +37,11 @@ class MainMenuState extends FlxState
 		var white = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 		add(white);
 
-		backdrop = new FlxBackdrop('assets/images/menu/backdrop.png', 1, 1, true, true);
+		backdrop = new FlxBackdrop(GameTools.getImage('menu/backdrop'), 1, 1, true, true);
 		backdrop.alpha = 0.35;
 		add(backdrop);
 
-		var logo = new FlxSprite().loadGraphic('assets/images/menu/logo.png');
+		var logo = new FlxSprite().loadGraphic(GameTools.getImage('menu/logo'));
 		logo.antialiasing = false;
 		logo.screenCenter(X);
 		logo.y -= logo.height;
@@ -74,7 +74,7 @@ class MainMenuState extends FlxState
 
 	function changeSelection(change:Int = 0)
 	{
-		FlxG.sound.play('assets/sounds/scroll.wav');
+		FlxG.sound.play(GameTools.getSound('scroll'));
 		curSelected += change;
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
@@ -111,7 +111,7 @@ class MenuButton extends FlxSpriteGroup
 	{
 		super();
 
-		var box = new FlxSprite(leX, leY).loadGraphic('assets/images/menu/box.png');
+		var box = new FlxSprite(leX, leY).loadGraphic(GameTools.getImage('menu/box'));
 		add(box);
 
 		boxText = new FlxText(leX, leY - 20, 0, label, 40);

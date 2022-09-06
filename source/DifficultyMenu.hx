@@ -23,7 +23,7 @@ class DifficultyMenu extends FlxState
 	{
 		super.create();
 
-		var bg = new FlxSprite().loadGraphic('assets/images/menu/difficulty/back.png');
+		var bg = new FlxSprite().loadGraphic(GameTools.getImage('menu/difficulty/back'));
 		bg.scale.set(2, 2);
 		bg.x += bg.width / 2;
 		bg.y += bg.height / 2;
@@ -63,7 +63,7 @@ class DifficultyMenu extends FlxState
 			FlxG.save.data.difficulty = 2;
 		if (FlxG.save.data.difficulty > 2)
 			FlxG.save.data.difficulty = 0;
-		FlxG.sound.play('assets/sounds/scroll.wav');
+		FlxG.sound.play(GameTools.getSound('scroll'));
 		camFollow.y = yArray[FlxG.save.data.difficulty];
 	}
 }
@@ -74,7 +74,7 @@ class DifficultyCard extends FlxSpriteGroup
 	{
 		super();
 
-		var card = new FlxSprite(leX, leY).loadGraphic('assets/images/menu/difficulty/${diffName.toLowerCase()}.png');
+		var card = new FlxSprite(leX, leY).loadGraphic(GameTools.getImage('menu/difficulty/${diffName.toLowerCase()}'));
 		card.antialiasing = false;
 		add(card);
 

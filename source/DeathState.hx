@@ -21,7 +21,7 @@ class DeathState extends FlxSubState
 	override function create()
 	{
 		super.create();
-		var deadSprite = new FlxSprite(0, 50).loadGraphic('assets/images/game/death/died.png');
+		var deadSprite = new FlxSprite(0, 50).loadGraphic(GameTools.getImage('game/death/died'));
 		deadSprite.scale.set(2, 2);
 		deadSprite.y += deadSprite.height / 2;
 		deadSprite.screenCenter(X);
@@ -55,7 +55,7 @@ class DeathState extends FlxSubState
 	function changeSelection(change:Int = 0)
 	{
 		curSelected += change;
-		FlxG.sound.play('assets/sounds/scroll.wav');
+		FlxG.sound.play(GameTools.getSound('scroll'));
 		if (curSelected < 0)
 			curSelected = coolMenuGroup.length - 1;
 		if (curSelected >= coolMenuGroup.length)

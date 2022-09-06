@@ -32,7 +32,7 @@ class PlayState extends FlxState
 		var bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 		add(bg);
 
-		potBack = new FlxSprite().loadGraphic('assets/images/game/potBack.png');
+		potBack = new FlxSprite().loadGraphic(GameTools.getImage('game/potBack'));
 		potBack.antialiasing = false;
 		potBack.scale.set(4, 4);
 		potBack.y = 853;
@@ -40,7 +40,7 @@ class PlayState extends FlxState
 		potBack.active = false;
 		add(potBack);
 
-		egg = new FlxSprite().loadGraphic('assets/images/game/egg.png');
+		egg = new FlxSprite().loadGraphic(GameTools.getImage('game/egg'));
 		egg.antialiasing = false;
 		egg.scale.set(4, 4);
 		egg.updateHitbox();
@@ -57,7 +57,7 @@ class PlayState extends FlxState
 		platformGroup = new FlxGroup();
 		add(platformGroup);
 
-		potFront = new FlxSprite().loadGraphic('assets/images/game/potFront.png');
+		potFront = new FlxSprite().loadGraphic(GameTools.getImage('game/potFront'));
 		potFront.antialiasing = false;
 		// potFront.scale.set(4, 4);
 		potFront.y = 853 - 24;
@@ -65,7 +65,7 @@ class PlayState extends FlxState
 		potFront.screenCenter(X);
 		add(potFront);
 
-		var startPlat = new FlxSprite().loadGraphic('assets/images/game/plat.png');
+		var startPlat = new FlxSprite().loadGraphic(GameTools.getImage('game/plat'));
 		startPlat.antialiasing = false;
 		startPlat.scale.set(4, 4);
 		startPlat.updateHitbox();
@@ -100,7 +100,7 @@ class PlayState extends FlxState
 						diffModifier = 0;
 				}
 
-				var plat = new FlxSprite().loadGraphic('assets/images/game/plat.png');
+				var plat = new FlxSprite().loadGraphic(GameTools.getImage('game/plat'));
 				plat.antialiasing = false;
 				plat.scale.set(4, 4);
 				plat.updateHitbox();
@@ -184,7 +184,7 @@ class PlayState extends FlxState
 			#if !debug
 			updateScore = false;
 			isDead = true;
-			FlxG.sound.play('assets/sounds/death.wav');
+			FlxG.sound.play(GameTools.getSound('death'));
 			FlxG.camera.shake(0.05, 0.75, function()
 			{
 				new FlxTimer().start(0.25, function(tmr:FlxTimer)
