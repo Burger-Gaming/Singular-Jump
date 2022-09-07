@@ -54,6 +54,8 @@ class DifficultyMenu extends FlxState
 			FlxG.switchState(new PlayState());
 		if (FlxG.keys.justPressed.ESCAPE)
 			FlxG.switchState(new MainMenuState());
+		if (FlxG.keys.justPressed.G)
+			openSubState(new GameSettingsSubstate());
 	}
 
 	function changeDiff(change:Int)

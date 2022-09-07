@@ -1,6 +1,5 @@
 package;
 
-import MainMenuState.MenuButton;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
@@ -10,7 +9,7 @@ import flixel.text.FlxText;
 class DeathState extends FlxSubState
 {
 	var deathArray:Array<String> = ['Restart', 'Exit'];
-	var coolMenuGroup:FlxTypedGroup<MenuButton>;
+	var coolMenuGroup:FlxTypedGroup<GameTools.MenuButton>;
 	var curSelected:Int = 0;
 
 	public function new()
@@ -40,11 +39,11 @@ class DeathState extends FlxSubState
 			deadText.y -= 200;
 		}
 
-		coolMenuGroup = new FlxTypedGroup<MenuButton>();
+		coolMenuGroup = new FlxTypedGroup<GameTools.MenuButton>();
 
 		for (i in 0...deathArray.length)
 		{
-			var item = new MenuButton(((FlxG.width / 2) - 250), (i * 160) + 600, deathArray[i]);
+			var item = new GameTools.MenuButton(((FlxG.width / 2) - 250), (i * 160) + 600, deathArray[i]);
 			coolMenuGroup.add(item);
 		}
 

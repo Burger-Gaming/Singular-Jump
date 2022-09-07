@@ -19,7 +19,7 @@ class MainMenuState extends FlxState
 	var backdrop:FlxBackdrop;
 	var menuItems:Array<String> = ['Start Game' #if desktop, 'Exit' #end];
 	var curSelected:Int = 0;
-	var menuItemGroup:FlxTypedGroup<MenuButton>;
+	var menuItemGroup:FlxTypedGroup<GameTools.MenuButton>;
 
 	override function create()
 	{
@@ -33,6 +33,7 @@ class MainMenuState extends FlxState
 		{
 			FlxG.save.data.difficulty = 1;
 		}
+		FlxG.autoPause = false;
 
 		var white = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 		add(white);
@@ -49,11 +50,11 @@ class MainMenuState extends FlxState
 		FlxTween.tween(logo, {y: (FlxG.height / 2) - (logo.height * 2)}, 1, {ease: FlxEase.circOut});
 		FlxTween.tween(logo.scale, {x: 1.25, y: 1.25}, 5, {ease: FlxEase.circInOut, type: PINGPONG});
 
-		menuItemGroup = new FlxTypedGroup<MenuButton>();
+		menuItemGroup = new FlxTypedGroup<GameTools.MenuButton>();
 
 		for (i in 0...menuItems.length)
 		{
-			var menuItem = new MenuButton(((FlxG.width / 2) - 250), (i * 160) + 600, menuItems[i]);
+			var menuItem = new GameTools.MenuButton(((FlxG.width / 2) - 250), (i * 160) + 600, menuItems[i]);
 			menuItemGroup.add(menuItem);
 		}
 		add(menuItemGroup);
@@ -100,24 +101,5 @@ class MainMenuState extends FlxState
 				Sys.exit(0);
 				#end
 		}
-	}
-}
-
-class MenuButton extends FlxSpriteGroup
-{
-	public var boxText:FlxText;
-
-	override public function new(leX:Float = 0, leY:Float = 0, label:String)
-	{
-		super();
-
-		var box = new FlxSprite(leX, leY).loadGraphic(GameTools.getImage('menu/box'));
-		add(box);
-
-		boxText = new FlxText(leX, leY - 20, 0, label, 40);
-		boxText.x += (250 - (boxText.width / 2));
-		boxText.y += (80 - (boxText.height / 2));
-		boxText.color = FlxColor.BLACK;
-		add(boxText);
 	}
 }
