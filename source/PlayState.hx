@@ -144,7 +144,7 @@ class PlayState extends FlxState
 
 		new FlxTimer().start(50, function(tmr:FlxTimer)
 		{
-			if (potFront.y >= 0 && updateScore && FlxG.save.data.difficulty >= 1)
+			if (potFront.y >= 100 && updateScore && FlxG.save.data.difficulty >= 1)
 			{
 				FlxTween.tween(potFront, {y: potFront.y - 100}, 2, {ease: FlxEase.sineInOut});
 				FlxTween.tween(potBack, {y: potBack.y - 100}, 2, {ease: FlxEase.sineInOut});
