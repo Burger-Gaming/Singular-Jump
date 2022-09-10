@@ -31,13 +31,17 @@ class DifficultyMenu extends FlxState
 		bg.color = 0xFF6C6C6C;
 		add(bg);
 
+		var cardCentering:Float = 0;
+
 		for (i in 0...difficultyArray.length)
 		{
 			var card = new DifficultyCard(0, i * 450, difficultyArray[i][0], difficultyDescription[i], difficultyArray[i][1]);
 			add(card);
+
+			cardCentering = card.width / 2;
 		}
 
-		camFollow = new FlxObject(300, yArray[FlxG.save.data.difficulty]);
+		camFollow = new FlxObject(cardCentering, yArray[FlxG.save.data.difficulty]);
 		add(camFollow);
 
 		FlxG.camera.follow(camFollow, LOCKON, 0.5);

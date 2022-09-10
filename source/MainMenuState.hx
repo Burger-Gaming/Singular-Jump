@@ -25,15 +25,7 @@ class MainMenuState extends FlxState
 	{
 		super.create();
 
-		if (FlxG.save.data.highScore == null)
-		{
-			FlxG.save.data.highScore = 0;
-		}
-		if (FlxG.save.data.difficulty == null)
-		{
-			FlxG.save.data.difficulty = 1;
-		}
-		FlxG.autoPause = false;
+		GameTools.setupGame();
 
 		var white = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 		add(white);

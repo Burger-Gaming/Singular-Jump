@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.addons.tile.FlxTileSpecial;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
@@ -10,6 +11,8 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxCollision;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import openfl.filters.BitmapFilter;
+import openfl.filters.ShaderFilter;
 
 class PlayState extends FlxState
 {
@@ -28,6 +31,21 @@ class PlayState extends FlxState
 	{
 		super.create();
 		// FlxG.camera.zoom = 4;
+
+		var filters:Array<BitmapFilter> = [];
+
+		var flipFilterX = new ShaderFilter(new GameTools.FlipXAxis());
+		if (FlxG.save.data.flipX)
+			filters.push(flipFilterX);
+
+		var flipFilterY = new ShaderFilter(new GameTools.FlipYAxis());
+		if (FlxG.save.data.flipY)
+			filters.push(flipFilterY);
+
+		FlxG.camera.setFilters(filters);
+
+		if (FlxG.save.data.voidMode)
+			FlxG.camera.visible = false;
 
 		var bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 		add(bg);
