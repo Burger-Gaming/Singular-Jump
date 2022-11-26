@@ -28,6 +28,8 @@ class DeathState extends FlxSubState
 
 		var deadText = new FlxText(0, 0, 0, "High score: " + FlxG.save.data.highScore, 32);
 		deadText.alignment = CENTER;
+		deadText.font = "assets/fonts/SHOWG.ttf";
+		deadText.antialiasing = true;
 		deadText.screenCenter(XY);
 		deadText.y -= 200;
 		add(deadText);

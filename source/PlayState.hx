@@ -94,6 +94,8 @@ class PlayState extends FlxState
 
 		var scoreText:FlxText = new FlxText(5, 5, 0, "Score: " + gameScore, 32);
 		scoreText.color = FlxColor.BLACK;
+		scoreText.font = "assets/fonts/SHOWG.ttf";
+		scoreText.antialiasing = true;
 		add(scoreText);
 
 		FlxTween.tween(startPlat, {y: FlxG.height}, 5, {

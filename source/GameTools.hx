@@ -47,8 +47,10 @@ class MenuButton extends FlxSpriteGroup
 		add(box);
 
 		boxText = new FlxText(leX, leY - 20, 0, label, 40);
-		boxText.x += (250 - (boxText.width / 2));
-		boxText.y += (80 - (boxText.height / 2));
+		boxText.x += ((box.width / 2) - (boxText.width / 2));
+		boxText.y += ((box.height / 2)/* + (boxText.height / 4)*/);
+		boxText.font = "assets/fonts/SHOWG.ttf";
+		boxText.antialiasing = true;
 		boxText.color = FlxColor.BLACK;
 		add(boxText);
 	}

@@ -101,6 +101,8 @@ class DifficultyCard extends FlxSpriteGroup
 		cardText.color = diffColor;
 		cardText.y -= cardText.height / 2;
 		cardText.borderStyle = SHADOW;
+		cardText.font = "assets/fonts/SHOWG.ttf";
+		cardText.antialiasing = true;
 		cardText.shadowOffset.set(2, 2);
 		add(cardText);
 	}

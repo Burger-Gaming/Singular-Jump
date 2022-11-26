@@ -89,6 +89,8 @@ class GameSettingsSubstate extends FlxSubState
 		descriptionText = new FlxText(0, 0, 0, 'Hover over a button to see a description!', 16);
 		descriptionText.borderStyle = SHADOW;
 		descriptionText.shadowOffset.set(2, 2);
+		descriptionText.font = "assets/fonts/SHOWG.ttf";
+		descriptionText.antialiasing = true;
 		descriptionText.screenCenter(XY);
 		descriptionText.alignment = CENTER;
 		descriptionText.scrollFactor.set();
