@@ -19,7 +19,7 @@ class PlayState extends FlxState
 	var egg:FlxSprite;
 	var levelBounds:FlxGroup;
 	var jumping:Bool = false;
-	var platformGroup:FlxGroup;
+	var platformGroup:FlxTypedGroup<FlxSprite>;
 	var canJump:Bool;
 	var potBack:FlxSprite;
 	var potFront:FlxSprite;
@@ -63,7 +63,7 @@ class PlayState extends FlxState
 		egg.scale.set(4, 4);
 		egg.updateHitbox();
 		egg.acceleration.y = 900 * 1.05;
-		egg.maxVelocity.y = 900 * 1.5;
+		egg.maxVelocity.y = 900 * 1.05;
 		egg.screenCenter(XY);
 		add(egg);
 
@@ -72,7 +72,7 @@ class PlayState extends FlxState
 
 		levelBounds.members[3].destroy(); // destroy the floor so you can die
 
-		platformGroup = new FlxGroup();
+		platformGroup = new FlxTypedGroup<FlxSprite>();
 		add(platformGroup);
 
 		potFront = new FlxSprite().loadGraphic(GameTools.getImage('game/potFront'));
@@ -161,7 +161,8 @@ class PlayState extends FlxState
 		}, 0);
 	}
 
-	var jumpTimer:Float = 0;
+	var jumpTimer:Int = 0;
+	var jumpPressedTimer:Int = 0;
 
 	override public function update(elapsed:Float)
 	{
@@ -187,16 +188,27 @@ class PlayState extends FlxState
 			egg.velocity.x = 0;
 		}
 
-		if (jumpTimer >= 0 && jumpPressed && !jumping && canJump)
+		if (jumpPressed && !jumping && canJump)
 		{
 			canJump = false;
-			egg.velocity.y = -900;
+			egg.velocity.y -= 900 * 1.25;
 		}
+
+		if (jumpPressed && !canJump && jumpTimer <= 15){
+			egg.velocity.y -= 900 * 1.25;
+		}
+
+		if (canJump)
+			jumpTimer = 0;
+		else
+			jumpTimer ++;
+		if (elapsed % 10 == 0) 	trace(egg.velocity.y);
 
 		if (egg.isTouching(FLOOR))
 		{
 			canJump = true;
 		}
+
 		if (egg.y >= FlxG.height && !isDead)
 		{
 			#if !debug
@@ -210,6 +222,7 @@ class PlayState extends FlxState
 					if (gameScore > FlxG.save.data.highScore && FlxG.save.data.difficulty <= 1)
 						FlxG.save.data.highScore = gameScore;
 					openSubState(new DeathState());
+					persistentUpdate = false;
 				});
 			});
 			#end

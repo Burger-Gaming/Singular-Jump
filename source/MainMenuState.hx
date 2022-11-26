@@ -31,11 +31,11 @@ class MainMenuState extends FlxState
 		add(white);
 
 		backdrop = new FlxBackdrop(GameTools.getImage('menu/backdrop'), 1, 1, true, true);
-		backdrop.alpha = 0.35;
+		backdrop.alpha = 0.55;
 		add(backdrop);
 
 		var logo = new FlxSprite().loadGraphic(GameTools.getImage('menu/logo'));
-		logo.antialiasing = false;
+		logo.antialiasing = true;
 		logo.screenCenter(X);
 		logo.y -= logo.height;
 		add(logo);

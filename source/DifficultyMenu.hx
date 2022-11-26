@@ -7,6 +7,8 @@ import flixel.FlxState;
 import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 
 class DifficultyMenu extends FlxState
 {
@@ -18,15 +20,14 @@ class DifficultyMenu extends FlxState
 	];
 	var yArray:Array<Float> = [200, 650, 1100];
 	var camFollow:FlxObject;
+	public static var gameSettingsBG:FlxSprite;
+	public static var inGameSettings:Bool = false;
 
 	override function create()
 	{
 		super.create();
 
 		var bg = new FlxSprite().loadGraphic(GameTools.getImage('menu/difficulty/back'));
-		bg.scale.set(2, 2);
-		bg.x += bg.width / 2;
-		bg.y += bg.height / 2;
 		bg.scrollFactor.set();
 		bg.color = 0xFF6C6C6C;
 		add(bg);
@@ -41,6 +42,12 @@ class DifficultyMenu extends FlxState
 			cardCentering = card.width / 2;
 		}
 
+		gameSettingsBG = new FlxSprite().loadGraphic(GameTools.getImage('menu/difficulty/gameSettings/gamesettingsbg'));
+		gameSettingsBG.x = FlxG.width - 90;
+		gameSettingsBG.y = 0;
+		gameSettingsBG.scrollFactor.set();
+		add(gameSettingsBG);
+
 		camFollow = new FlxObject(cardCentering, yArray[FlxG.save.data.difficulty]);
 		add(camFollow);
 
@@ -49,17 +56,23 @@ class DifficultyMenu extends FlxState
 
 	override function update(elapsed:Float)
 	{
-		// camFollow.y = (450 * FlxG.save.data.difficulty);
-		if (FlxG.keys.justPressed.DOWN)
-			changeDiff(1);
-		if (FlxG.keys.justPressed.UP)
-			changeDiff(-1);
-		if (FlxG.keys.justPressed.ENTER)
-			FlxG.switchState(new PlayState());
-		if (FlxG.keys.justPressed.ESCAPE)
-			FlxG.switchState(new MainMenuState());
-		if (FlxG.keys.justPressed.G)
-			openSubState(new GameSettingsSubstate());
+		if (!inGameSettings){
+			if (FlxG.keys.justPressed.DOWN)
+				changeDiff(1);
+			if (FlxG.keys.justPressed.UP)
+				changeDiff(-1);
+			if (FlxG.keys.justPressed.ENTER)
+				FlxG.switchState(new PlayState());
+			if (FlxG.keys.justPressed.ESCAPE)
+				FlxG.switchState(new MainMenuState());
+			if (FlxG.keys.justPressed.G){
+				inGameSettings = true;
+				FlxTween.tween(gameSettingsBG, {x: -118}, 0.5, {ease: FlxEase.bounceOut, onComplete: function(twn:FlxTween){
+					persistentUpdate = true;
+					openSubState(new GameSettingsSubstate());
+				}});
+			}
+		}
 	}
 
 	function changeDiff(change:Int)
@@ -81,7 +94,7 @@ class DifficultyCard extends FlxSpriteGroup
 		super();
 
 		var card = new FlxSprite(leX, leY).loadGraphic(GameTools.getImage('menu/difficulty/${diffName.toLowerCase()}'));
-		card.antialiasing = false;
+		card.antialiasing = true;
 		add(card);
 
 		var cardText:FlxText = new FlxText(leX + card.width + 20, leY + card.height / 2, 0, diffDesc, 16);

@@ -44,6 +44,7 @@ class GameSettingsSubstate extends FlxSubState
 
 		egg = new FlxSprite().loadGraphic(GameTools.getImage('menu/difficulty/gameSettings/egGear'));
 		egg.alpha = 0;
+		egg.antialiasing = true;
 		egg.screenCenter(XY);
 		egg.scrollFactor.set();
 		add(egg);
@@ -54,6 +55,7 @@ class GameSettingsSubstate extends FlxSubState
 		{
 			var card = new FlxSprite((i * 400) + 1024, 100).loadGraphic(GameTools.getImage('menu/difficulty/gameSettings/options/${cardArray[i][2]}'));
 			card.scrollFactor.set();
+			card.antialiasing = true;
 			card.updateHitbox();
 			cardGroup.add(card);
 
@@ -146,8 +148,10 @@ class GameSettingsSubstate extends FlxSubState
 			cardGroup.forEach(s -> FlxTween.tween(s, {alpha: 0}, 0.5, {ease: FlxEase.circInOut}));
 			new FlxTimer().start(0.5, function(tmr:FlxTimer)
 			{
-				closeSubState();
-				FlxG.switchState(new DifficultyMenu());
+				close();
+				FlxTween.tween(DifficultyMenu.gameSettingsBG, {x: FlxG.width - 90}, 0.5, {ease: FlxEase.bounceOut, onComplete: function(twn:FlxTween){
+					DifficultyMenu.inGameSettings = false;
+				}});
 			});
 		}
 	}

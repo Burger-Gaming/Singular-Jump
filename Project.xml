@@ -82,5 +82,5 @@
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
-	<icon path="assets/images/game/egg.svg" />
+	<icon path="assets/images/game/egg.svg" size="512"/>
 </project>
